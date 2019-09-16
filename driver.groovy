@@ -174,7 +174,7 @@ def setHue(hue){
 def setSaturation(saturation){
     log.info "setSaturation ${saturation}"
 
-	saturation > 100 ? (saturation = 100) : null
+    saturation > 100 ? (saturation = 100) : null
 
     // sendEvent(name: "saturation", value: saturation,descriptionText:"Set saturation to $hue", unit: "%")   
     setColor(hue: device.currentValue("hue"), saturation: saturation, level: device.currentValue("level"))
@@ -183,7 +183,7 @@ def setSaturation(saturation){
 def setLevel(value) {
     log.info "Setting level to ${value}"
 
-   	value > 100 ? (value = 100) : null
+    value > 100 ? (value = 100) : null
 
     //setColor(hue: device.currentValue("hue"), saturation: device.currentValue("saturation"), level: level)
 
@@ -220,23 +220,23 @@ def updateLevel(value) {
 }
 
 def huesatToRGB(float hue, float sat) {
-	while (hue >= 100) {
+    while (hue >= 100) {
         hue -= 100
     }
 
-	int h = (int)(hue / 100 * 6)
-	float f = hue / 100 * 6 - h
+    int h = (int)(hue / 100 * 6)
+    float f = hue / 100 * 6 - h
 	
     int p = Math.round(255 * (1 - (sat / 100)))
-	int q = Math.round(255 * (1 - (sat / 100) * f))
-	int t = Math.round(255 * (1 - (sat / 100) * (1 - f)))
+    int q = Math.round(255 * (1 - (sat / 100) * f))
+    int t = Math.round(255 * (1 - (sat / 100) * (1 - f)))
 	
     switch (h) {
-		case 0: return [r: "255", g: t, b: p]
-		case 1: return [r: q, g: "255", b: p]
-		case 2: return [r: p, g: "255", b: t]
+        case 0: return [r: "255", g: t, b: p]
+        case 1: return [r: q, g: "255", b: p]
+        case 2: return [r: p, g: "255", b: t]
         case 3: return [r: p, g: q, b: "255"]
         case 4: return [r: t, g: p, b: "255"]
-		case 5: return [r: "255", g: p, b: q]
+        case 5: return [r: "255", g: p, b: q]
 	}
 }
